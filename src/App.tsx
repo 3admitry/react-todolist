@@ -1,8 +1,9 @@
 import React from 'react';
 import './App.css';
-import {TaskType, Todolist} from './site/Todolist';
+import {TaskType, Todolist} from './components/Todolist';
 import {useState} from 'react';
 import {v1} from 'uuid';
+import {AddItemForm} from './components/AddItemForm';
 
 export type valueFilterType = 'all' | 'active' | 'completed'
 
@@ -61,6 +62,7 @@ function App() {
         setTasksObjc({...tasksObjc, [todoListId]: newTasks})
     }
 
+
     function changeFilter(filter: valueFilterType, todoListId: string) {
         // let todoList = todoLists.find((t) => t.id === todoListId)
         // if (todoList)
@@ -99,11 +101,25 @@ function App() {
         ]
     })
 
+    const addTodolist = (title: string) => {
+        let newTodolist: todoListsType = {
+            id: v1(),
+            title: title,
+            filter: 'all'
+        };
+        setTodoLists([newTodolist, ...todoLists]);
+        setTasksObjc({
+            ...tasksObjc,
+            [newTodolist.id]:[]
+        })
+    }
+
 
     return (
         <div className="App">
-
+            <AddItemForm addItem={addTodolist}/>
             {todoLists.map((tl) => {
+
 
                 let tasksTodoList = tasksObjc[tl.id];
                 if (tl.filter === 'active') {

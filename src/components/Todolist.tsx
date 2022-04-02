@@ -1,5 +1,6 @@
-import React, {useState, ChangeEvent, KeyboardEvent} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {valueFilterType} from '../App';
+import {AddItemForm} from './AddItemForm';
 
 export type TaskType = {
     id: string
@@ -31,26 +32,9 @@ export const Todolist: React.FC<PropsType> = ({ // props
                                                   valueFilter
                                               }) => {
 
-    let [titleNewTask, setTitleNewTask] = useState('')
-    let [error, setError] = useState<string | null>(null)
 
-    const onChangeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setTitleNewTask(e.currentTarget.value)
-    }
-
-    const onKeyPressInputHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        e.key === 'Enter' && onClickButtonHandler()
-    }
-
-    const onClickButtonHandler = () => {
-        if (titleNewTask.trim() !== '') {
-            addTask(titleNewTask.trim(), todoListId)
-            setTitleNewTask('')
-            setError(null)
-        } else {
-            setError('Field is required')
-        }
-
+    const addItem = (title: string) => {
+        addTask(title, todoListId)
     }
 
     const onChangeCheckboxHandler = (taskId: string, event: ChangeEvent<HTMLInputElement>, todoListId: string) => {
@@ -85,16 +69,8 @@ export const Todolist: React.FC<PropsType> = ({ // props
                 &nbsp;&nbsp;
                 <button onClick={() => removeTodoList(todoListId)}>x</button>
             </h3>
+            <AddItemForm addItem={addItem}/>
 
-            <div>
-                <input value={titleNewTask}
-                       onChange={onChangeInputHandler}
-                       onKeyPress={onKeyPressInputHandler}
-                       className={error ? 'error' : ''}
-                />
-                <button onClick={onClickButtonHandler}>+</button>
-                {error && <div className={'error-message'}>{error}</div>}
-            </div>
             <ul>
                 {taskList}
             </ul>
