@@ -1,6 +1,7 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 import {valueFilterType} from '../App';
 import {AddItemForm} from './AddItemForm';
+import {EditableTitle} from './EditableTitle';
 
 export type TaskType = {
     id: string
@@ -16,6 +17,8 @@ type PropsType = {
     changeFilter: (value: valueFilterType, todoListId: string) => void
     addTask: (title: string, todoListId: string) => void
     changeStatus: (taskId: string, checked: boolean, todoListId: string) => void
+    changeTitleTask: (taskId: string, newTitle: string, todoListId: string) => void
+    changeTodolistTitle: (newTitle: string, todoListId: string) => void
     removeTodoList: (todoListId: string) => void
     valueFilter: valueFilterType
 }
@@ -29,7 +32,9 @@ export const Todolist: React.FC<PropsType> = ({ // props
                                                   addTask,
                                                   changeStatus,
                                                   removeTodoList,
-                                                  valueFilter
+                                                  valueFilter,
+                                                  changeTitleTask,
+                                                  changeTodolistTitle
                                               }) => {
 
 
@@ -41,8 +46,13 @@ export const Todolist: React.FC<PropsType> = ({ // props
         changeStatus(taskId, event.currentTarget.checked, todoListId)
     }
 
+
     // display Tasks List
     const taskList = tasks.map((t, i) => {
+        const changeTitleCurrentTask = (newTitle: string) => {
+            changeTitleTask(t.id, newTitle, todoListId)
+        }
+
         return (
             <li
                 className={(t.isDone ? 'is-done' : '')}
@@ -52,7 +62,7 @@ export const Todolist: React.FC<PropsType> = ({ // props
                        onChange={(event) => onChangeCheckboxHandler(t.id, event, todoListId)}
 
                 />
-                <span>{t.title}</span>
+                <EditableTitle title={t.title} changeTitle={changeTitleCurrentTask}/>
                 <button onClick={() => removeTask(t.id, todoListId)}>x</button>
             </li>
         )
@@ -62,10 +72,15 @@ export const Todolist: React.FC<PropsType> = ({ // props
     const onClickButtonHandlerActive = () => changeFilter('active', todoListId)
     const onClickButtonHandlerCompleted = () => changeFilter('completed', todoListId)
 
+    const chnageCurrentTodolistTitle = (title:string) => {
+        changeTodolistTitle(title, todoListId);
+    }
+
     //Display TodoList
     return (
         <div>
-            <h3>{title}
+            <h3>
+                <EditableTitle title={title} changeTitle={chnageCurrentTodolistTitle}/>
                 &nbsp;&nbsp;
                 <button onClick={() => removeTodoList(todoListId)}>x</button>
             </h3>
@@ -88,3 +103,4 @@ export const Todolist: React.FC<PropsType> = ({ // props
         </div>
     );
 }
+

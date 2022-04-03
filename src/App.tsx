@@ -52,6 +52,24 @@ function App() {
         setTasksObjc({...tasksObjc, [todoListId]: changedTaskArray})
     }
 
+    const changeTitleTask = (taskId: string, newTitle: string, todoListId: string) => {
+        let changedTaskArray = tasksObjc[todoListId].map(el => (taskId === el.id ? {
+            ...el,
+            title: newTitle
+        } : el))
+        setTasksObjc({...tasksObjc, [todoListId]: changedTaskArray})
+    }
+
+    const changeTodolistTitle = (newTitle: string, todoListId: string) => {
+        let changedTodolistArray = todoLists.map(el => (todoListId === el.id ? {
+            ...el,
+            title: newTitle
+        } : el))
+
+        setTodoLists(changedTodolistArray);
+
+    }
+
     function addTask(title: string, todoListId: string) {
         let newTask = {
             id: v1(),
@@ -96,8 +114,8 @@ function App() {
             {id: v1(), title: 'Milk', isDone: false},
             {id: v1(), title: 'Cookie', isDone: false},
             {id: v1(), title: 'Chocolate', isDone: true},
-            {id: v1(), title: 'Sugar', isDone: true},
-            {id: v1(), title: 'Water', isDone: false}
+            {id: v1(), title: 'Sugar222', isDone: true},
+            {id: v1(), title: 'Water3', isDone: false}
         ]
     })
 
@@ -139,6 +157,8 @@ function App() {
                         changeFilter={changeFilter}
                         addTask={addTask}
                         changeStatus={changeStatus}
+                        changeTitleTask={changeTitleTask}
+                        changeTodolistTitle={changeTodolistTitle}
                         valueFilter={tl.filter}
                         removeTodoList={removeTodoList}
                     />
