@@ -1,4 +1,5 @@
 import React, {KeyboardEvent, useState} from 'react';
+import {Button} from '@mui/material';
 
 type addItemFormProps = {
     addItem: (title: string) => void
@@ -34,7 +35,7 @@ export const AddItemForm: React.FC<addItemFormProps> = ({addItem}) => {
                    onKeyPress={onKeyPressInputHandler}
                    className={error ? 'error' : ''}
             />
-            <button onClick={onClickButtonHandler}>+</button>
+            <Button onClick={onClickButtonHandler} variant={'contained'} color={'primary'}>+</Button>
             {error && <div className={'error-message'}>{error}</div>}
         </div>
     )
