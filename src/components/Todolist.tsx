@@ -78,7 +78,7 @@ export const Todolist: React.FC<PropsType> = ({ // props
     const onClickButtonHandlerActive = () => changeFilter('active', todoListId)
     const onClickButtonHandlerCompleted = () => changeFilter('completed', todoListId)
 
-    const chnageCurrentTodolistTitle = (title: string) => {
+    const changeCurrentTodolistTitle = (title: string) => {
         changeTodolistTitle(title, todoListId);
     }
 
@@ -86,7 +86,7 @@ export const Todolist: React.FC<PropsType> = ({ // props
     return (
         <div>
             <h3>
-                <EditableTitle title={title} changeTitle={chnageCurrentTodolistTitle}/>
+                <EditableTitle title={title} changeTitle={changeCurrentTodolistTitle}/>
                 &nbsp;&nbsp;
                 <IconButton aria-label="delete" onClick={() => removeTodoList(todoListId)}>
                     <Delete/>
