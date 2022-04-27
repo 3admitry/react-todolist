@@ -36,7 +36,7 @@ type CommonActionType =
     | actionTypeChangeTodolistTitle
     | actionTypeChangeTodolistFilter
 
-export const todolistsReducer = (state: todoListsType[], action: CommonActionType): todoListsType[] => {
+export const todolistsReducer = (state: Array<todoListsType>, action: CommonActionType): Array<todoListsType> => {
     switch (action.type) {
         case ADD_TODOLIST:
             let newTodolist: todoListsType = {
