@@ -11,22 +11,23 @@ export const CHANGE_TODOLIST_FILTER = 'CHANGE_TODOLIST_FILTER';
 //     [key: string]: string
 // }
 
-type actionTypeAddTodolist = {
-    type: 'ADD_TODOLIST',
+export type actionTypeAddTodolist = {
+    type: 'ADD_TODOLIST'
     title: string
+    todolistId: string
 }
-type actionTypeRemoveTodolist = {
-    type: 'REMOVE_TODOLIST',
+export type actionTypeRemoveTodolist = {
+    type: 'REMOVE_TODOLIST'
     id: string
 }
 type actionTypeChangeTodolistTitle = {
-    type: 'CHANGE_TODOLIST_TITLE',
+    type: 'CHANGE_TODOLIST_TITLE'
     title: string,
     id: string
 }
 type actionTypeChangeTodolistFilter = {
-    type: 'CHANGE_TODOLIST_FILTER',
-    filter: valueFilterType,
+    type: 'CHANGE_TODOLIST_FILTER'
+    filter: valueFilterType
     id: string
 }
 
@@ -40,7 +41,7 @@ export const todolistsReducer = (state: Array<todoListsType>, action: CommonActi
     switch (action.type) {
         case ADD_TODOLIST:
             let newTodolist: todoListsType = {
-                id: v1(),
+                id: action.todolistId,
                 title: action.title,
                 filter: 'all'
             };
@@ -70,7 +71,7 @@ export const todolistsReducer = (state: Array<todoListsType>, action: CommonActi
 }
 
 export const addTodoListAC = (title: string): actionTypeAddTodolist => (
-    {type: 'ADD_TODOLIST', title: title}
+    {type: 'ADD_TODOLIST', title: title, todolistId: v1()}
 )
 export const removeTodoListAC = (id: string): actionTypeRemoveTodolist => (
     {type: 'REMOVE_TODOLIST', id: id}

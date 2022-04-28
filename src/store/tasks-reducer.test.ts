@@ -1,6 +1,14 @@
 import {tasksObjcType, todoListsType, valueFilterType} from '../App';
 import {v1} from 'uuid';
-import {addTaskAC, changeTaskStatusAC, changeTaskTitletAC, removeTaskAC, taskReducer} from './tasks-reducer';
+import {
+    addTaskAC,
+    addTodolistAC,
+    changeTaskStatusAC,
+    changeTaskTitletAC,
+    removeTaskAC,
+    tasksReducer
+} from './tasks-reducer';
+import {removeTodoListAC} from './todolists-reducer';
 
 let todoLists: todoListsType[];
 let todolistId1: string;
@@ -37,16 +45,17 @@ beforeEach(() => {
 
 test('Add new task', () => {
     let newTitle: string = 'Banana';
-    let result = taskReducer(tasksObjc, addTaskAC(newTitle, todolistId2))
+    let result = tasksReducer(tasksObjc, addTaskAC(newTitle, todolistId2))
 
     expect(result[todolistId2].length).toBe(tasksObjc[todolistId2].length + 1);
+    // @ts-ignore
     expect(result[todolistId2].at(-1).title).toBe('Banana');
 
 });
 
 test('Remove task', () => {
 
-    let result = taskReducer(tasksObjc, removeTaskAC('5WAD48-AD4dA', todolistId2))
+    let result = tasksReducer(tasksObjc, removeTaskAC('5WAD48-AD4dA', todolistId2))
 
     expect(result[todolistId2].length).toBe(tasksObjc[todolistId2].length - 1);
     expect(result[todolistId2].every(t=>t.id !== '5WAD48-AD4dA')).toBeTruthy();
@@ -56,7 +65,7 @@ test('Remove task', () => {
 
 test('Change task title', () => {
     let newTitle = 'Candies'
-    let result = taskReducer(tasksObjc, changeTaskTitletAC(newTitle, '5WAD48-AD4dA', todolistId2))
+    let result = tasksReducer(tasksObjc, changeTaskTitletAC(newTitle, '5WAD48-AD4dA', todolistId2))
 
     expect(result[todolistId2][3].title).toBe(newTitle);
 
@@ -65,9 +74,41 @@ test('Change task title', () => {
 
 test('Change todolist status', () => {
 
-    let result = taskReducer(tasksObjc, changeTaskStatusAC(false, '5WAD48-AD4dA', todolistId2))
+    let result = tasksReducer(tasksObjc, changeTaskStatusAC(false, '5WAD48-AD4dA', todolistId2))
 
     expect(result[todolistId2][3].isDone).toBe(false);
 
 });
+
+test('new array should be added when new todolist is added', () => {
+
+    const action = addTodolistAC("new todolist");
+
+    const endState = tasksReducer(tasksObjc, action)
+
+
+    const keys = Object.keys(endState);
+    const newKey = keys.find(k => k != todolistId1 && k != todolistId2);
+    if (!newKey) {
+        throw Error("new key should be added")
+    }
+
+    expect(keys.length).toBe(3);
+    expect(endState[newKey]).toEqual([]);
+});
+
+test('property with todolistId should be deleted', () => {
+
+    const action = removeTodoListAC(todolistId2);
+
+    const endState = tasksReducer(tasksObjc, action)
+
+
+    const keys = Object.keys(endState);
+
+    expect(keys.length).toBe(1);
+    expect(endState[todolistId2]).not.toBeDefined();
+});
+
+
 
