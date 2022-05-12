@@ -2,13 +2,12 @@ import {tasksObjcType, todoListsType, valueFilterType} from '../App';
 import {v1} from 'uuid';
 import {
     addTaskAC,
-    addTodolistAC,
     changeTaskStatusAC,
     changeTaskTitletAC,
     removeTaskAC,
     tasksReducer
 } from './tasks-reducer';
-import {removeTodoListAC} from './todolists-reducer';
+import {addTodoListAC, removeTodoListAC} from './todolists-reducer';
 
 let todoLists: todoListsType[];
 let todolistId1: string;
@@ -82,7 +81,7 @@ test('Change todolist status', () => {
 
 test('new array should be added when new todolist is added', () => {
 
-    const action = addTodolistAC("new todolist");
+    const action = addTodoListAC("new todolist");
 
     const endState = tasksReducer(tasksObjc, action)
 

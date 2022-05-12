@@ -43,7 +43,7 @@ export const tasksReducer = (state: tasksObjcType, action: CommonActionType): ta
             let newTask: TaskType = {
                 id: v1(),
                 title: action.title,
-                isDone: true
+                isDone: false
             };
             return {
                 ...state,
