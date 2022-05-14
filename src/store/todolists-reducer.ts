@@ -6,6 +6,9 @@ export const REMOVE_TODOLIST = 'REMOVE_TODOLIST';
 export const CHANGE_TODOLIST_TITLE = 'CHANGE_TODOLIST_TITLE';
 export const CHANGE_TODOLIST_FILTER = 'CHANGE_TODOLIST_FILTER';
 
+export let todolistId1 = v1();
+export let todolistId2 = v1();
+
 // type actionType = {
 //     type: string,
 //     [key: string]: string
@@ -37,7 +40,12 @@ type CommonActionType =
     | actionTypeChangeTodolistTitle
     | actionTypeChangeTodolistFilter
 
-export const todolistsReducer = (state: Array<todoListsType>, action: CommonActionType): Array<todoListsType> => {
+const initialState: Array<todoListsType> = [
+    {id: todolistId1, title: 'What to learn', filter: 'all'},
+    {id: todolistId2, title: 'What to buy', filter: 'all'}
+]
+
+export const todolistsReducer = (state: Array<todoListsType> = initialState, action: CommonActionType): Array<todoListsType> => {
     switch (action.type) {
         case ADD_TODOLIST:
             let newTodolist: todoListsType = {
@@ -66,7 +74,7 @@ export const todolistsReducer = (state: Array<todoListsType>, action: CommonActi
         }
 
         default:
-            throw new Error('I don\'t understand this action type');
+            return state;
     }
 }
 

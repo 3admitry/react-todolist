@@ -1,7 +1,7 @@
 import {tasksObjcType} from '../App';
 import {v1} from 'uuid';
 import {TaskType} from '../components/Todolist';
-import { actionTypeAddTodolist, actionTypeRemoveTodolist } from './todolists-reducer';
+import {actionTypeAddTodolist, actionTypeRemoveTodolist, todolistId2, todolistId1} from './todolists-reducer';
 
 
 export const ADD_TASK = 'ADD_TASK';
@@ -36,8 +36,27 @@ type actionTypeChangeTaskStatus = {
 
 type CommonActionType = actionTypeAddTask | actionTypeRemoveTask | actionTypeChangeTaskTitle | actionTypeChangeTaskStatus | actionTypeAddTodolist | actionTypeRemoveTodolist
 
+const initialState: tasksObjcType = {
+    [todolistId1]: [
+        {id: v1(), title: 'CSS', isDone: true},
+        {id: v1(), title: 'JS', isDone: true},
+        {id: v1(), title: 'React', isDone: false},
+        {id: v1(), title: 'Babel', isDone: false},
+        {id: v1(), title: 'Mysql', isDone: true},
+        {id: v1(), title: 'NodeJS', isDone: false}
+    ],
+    [todolistId2]: [
+        {id: v1(), title: 'Bread', isDone: true},
+        {id: v1(), title: 'Milk', isDone: false},
+        {id: v1(), title: 'Cookie', isDone: false},
+        {id: v1(), title: 'Chocolate', isDone: true},
+        {id: v1(), title: 'Sugar222', isDone: true},
+        {id: v1(), title: 'Water3', isDone: false}
+    ]
+}
 
-export const tasksReducer = (state: tasksObjcType, action: CommonActionType): tasksObjcType => {
+
+export const tasksReducer = (state: tasksObjcType = initialState, action: CommonActionType): tasksObjcType => {
     switch (action.type) {
         case ADD_TASK:
             let newTask: TaskType = {
@@ -75,7 +94,7 @@ export const tasksReducer = (state: tasksObjcType, action: CommonActionType): ta
             delete setCopy[action.id]
             return setCopy
         default:
-            throw new Error('I don\'t understand this action type');
+            return state;
     }
 }
 
