@@ -1,4 +1,4 @@
-import {tasksObjcType} from '../App';
+import {tasksObjcType} from '../AppWithReducer';
 import {v1} from 'uuid';
 import {TaskType} from '../components/Todolist';
 import {actionTypeAddTodolist, actionTypeRemoveTodolist, todolistId2, todolistId1} from './todolists-reducer';
@@ -37,6 +37,10 @@ type actionTypeChangeTaskStatus = {
 type CommonActionType = actionTypeAddTask | actionTypeRemoveTask | actionTypeChangeTaskTitle | actionTypeChangeTaskStatus | actionTypeAddTodolist | actionTypeRemoveTodolist
 
 const initialState: tasksObjcType = {
+
+}
+/*
+const initialState: tasksObjcType = {
     [todolistId1]: [
         {id: v1(), title: 'CSS', isDone: true},
         {id: v1(), title: 'JS', isDone: true},
@@ -53,7 +57,7 @@ const initialState: tasksObjcType = {
         {id: v1(), title: 'Sugar222', isDone: true},
         {id: v1(), title: 'Water3', isDone: false}
     ]
-}
+}*/
 
 
 export const tasksReducer = (state: tasksObjcType = initialState, action: CommonActionType): tasksObjcType => {

@@ -5,7 +5,10 @@ type EditableTitleProps = {
     title: string
     changeTitle: (newTitle: string) => void
 }
-export const EditableTitle = (props: EditableTitleProps) => {
+export const EditableTitle = React.memo((props: EditableTitleProps) => {
+
+   console.log('EditableTitle is called')
+
     let [editMode, setEditMode] = useState(false)
     let [title, setTitle] = useState('')
 
@@ -27,4 +30,4 @@ export const EditableTitle = (props: EditableTitleProps) => {
 
 
     )
-}
+});

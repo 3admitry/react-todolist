@@ -6,8 +6,8 @@ type addItemFormProps = {
     addItem: (title: string) => void
 }
 
-export const AddItemForm: React.FC<addItemFormProps> = ({addItem}) => {
-
+export const AddItemForm: React.FC<addItemFormProps> = React.memo(({addItem}) => {
+    console.log('AddItemForm is called');
     let [titleNewTask, setTitleNewTask] = useState('')
     let [error, setError] = useState<string | null>(null)
 
@@ -46,4 +46,4 @@ export const AddItemForm: React.FC<addItemFormProps> = ({addItem}) => {
             </IconButton>
         </div>
     )
-}
+});

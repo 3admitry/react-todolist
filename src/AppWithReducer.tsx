@@ -24,7 +24,7 @@ export type tasksObjcType = {
     [key: string]: Array<TaskType>
 }
 
-function App() {
+function AppWithReducer() {
 
     let todolistId1 = v1();
     let todolistId2 = v1();
@@ -145,7 +145,7 @@ function App() {
                                     removeTask={removeTask}
                                     changeFilter={changeFilter}
                                     addTask={addTask}
-                                    changeStatus={changeStatus}
+                                    changeStatusTask={changeStatus}
                                     changeTitleTask={changeTitleTask}
                                     changeTodolistTitle={changeTodolistTitle}
                                     valueFilter={tl.filter}
@@ -163,5 +163,5 @@ function App() {
     );
 }
 
-export default App;
+export default AppWithReducer;
 

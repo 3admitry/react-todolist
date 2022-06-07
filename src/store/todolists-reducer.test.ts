@@ -1,4 +1,4 @@
-import {todoListsType, valueFilterType} from '../App';
+import {todoListsType, valueFilterType} from '../AppWithReducer';
 import {v1} from 'uuid';
 import todolistsReducer, {
     addTodoListAC,

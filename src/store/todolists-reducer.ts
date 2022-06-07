@@ -1,4 +1,4 @@
-import {todoListsType, valueFilterType} from '../App';
+import {todoListsType, valueFilterType} from '../AppWithReducer';
 import {v1} from 'uuid';
 
 export const ADD_TODOLIST = 'ADD_TODOLIST';
@@ -41,9 +41,13 @@ type CommonActionType =
     | actionTypeChangeTodolistFilter
 
 const initialState: Array<todoListsType> = [
+
+]
+
+/*const initialState: Array<todoListsType> = [
     {id: todolistId1, title: 'What to learn', filter: 'all'},
     {id: todolistId2, title: 'What to buy', filter: 'all'}
-]
+]*/
 
 export const todolistsReducer = (state: Array<todoListsType> = initialState, action: CommonActionType): Array<todoListsType> => {
     switch (action.type) {

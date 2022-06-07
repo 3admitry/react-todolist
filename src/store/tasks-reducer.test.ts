@@ -1,4 +1,4 @@
-import {tasksObjcType, todoListsType, valueFilterType} from '../App';
+import {tasksObjcType, todoListsType, valueFilterType} from '../AppWithReducer';
 import {v1} from 'uuid';
 import {
     addTaskAC,
