@@ -55,6 +55,7 @@ export const Todolist: React.FC<PropsTypeTodolsit> = React.memo(({ // props
 
 
     // display Tasks List
+
     const taskList = tasks.map(t => <Task
         changeStatusTask={changeStatusTask}
         changeTitleTask={changeTitleTask}

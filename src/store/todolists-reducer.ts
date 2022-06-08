@@ -40,14 +40,12 @@ type CommonActionType =
     | actionTypeChangeTodolistTitle
     | actionTypeChangeTodolistFilter
 
+// const initialState: Array<todoListsType> = []
+
 const initialState: Array<todoListsType> = [
-
-]
-
-/*const initialState: Array<todoListsType> = [
     {id: todolistId1, title: 'What to learn', filter: 'all'},
     {id: todolistId2, title: 'What to buy', filter: 'all'}
-]*/
+]
 
 export const todolistsReducer = (state: Array<todoListsType> = initialState, action: CommonActionType): Array<todoListsType> => {
     switch (action.type) {

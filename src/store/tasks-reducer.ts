@@ -36,17 +36,15 @@ type actionTypeChangeTaskStatus = {
 
 type CommonActionType = actionTypeAddTask | actionTypeRemoveTask | actionTypeChangeTaskTitle | actionTypeChangeTaskStatus | actionTypeAddTodolist | actionTypeRemoveTodolist
 
-const initialState: tasksObjcType = {
+// const initialState: tasksObjcType = {}
 
-}
-/*
 const initialState: tasksObjcType = {
     [todolistId1]: [
         {id: v1(), title: 'CSS', isDone: true},
         {id: v1(), title: 'JS', isDone: true},
         {id: v1(), title: 'React', isDone: false},
         {id: v1(), title: 'Babel', isDone: false},
-        {id: v1(), title: 'Mysql', isDone: true},
+        {id: v1(), title: 'MySQL', isDone: true},
         {id: v1(), title: 'NodeJS', isDone: false}
     ],
     [todolistId2]: [
@@ -54,10 +52,10 @@ const initialState: tasksObjcType = {
         {id: v1(), title: 'Milk', isDone: false},
         {id: v1(), title: 'Cookie', isDone: false},
         {id: v1(), title: 'Chocolate', isDone: true},
-        {id: v1(), title: 'Sugar222', isDone: true},
-        {id: v1(), title: 'Water3', isDone: false}
+        {id: v1(), title: 'Sugar', isDone: true},
+        {id: v1(), title: 'Water', isDone: false}
     ]
-}*/
+}
 
 
 export const tasksReducer = (state: tasksObjcType = initialState, action: CommonActionType): tasksObjcType => {
