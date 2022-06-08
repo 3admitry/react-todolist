@@ -3,7 +3,7 @@
 import React from 'react';
 
 import {ComponentStory, ComponentMeta} from '@storybook/react';
-import {EditableTitle} from './EditableTitle';
+import {EditableTitle} from '../components/EditableTitle';
 
 export default {
     title: 'TodoList/EditableTitle',

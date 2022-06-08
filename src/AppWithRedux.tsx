@@ -129,8 +129,6 @@ function AppWithRedux() {
                 </Grid>
             </Container>
 
-
-            {/*<Bodies title={'Book'} countli={simpleData}/>*/}
         </div>
     );
 }

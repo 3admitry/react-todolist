@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {ComponentStory, ComponentMeta} from '@storybook/react';
-import {Task} from './Task';
+import {Task} from '../components/Task';
 
 export default {
     title: 'TodoList/Task',

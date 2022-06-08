@@ -156,9 +156,6 @@ function AppWithReducer() {
                     })}
                 </Grid>
             </Container>
-
-
-            {/*<Bodies title={'Book'} countli={simpleData}/>*/}
         </div>
     );
 }
