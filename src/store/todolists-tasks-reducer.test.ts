@@ -83,7 +83,7 @@ beforeEach(() => {
 
 test('Ids of new todolist should be equal in todoList & tasks objects', () => {
 
-    const action = addTodolistAC("new todolist");
+    const action = addTodolistAC( {id: 'my-test-id', title: 'What to learn', addedDate: '', order: 0});
 
     const endTasksState = tasksReducer(tasksObj, action)
     const endTodolistsState = todolistsReducer(todoLists, action)
@@ -92,8 +92,8 @@ test('Ids of new todolist should be equal in todoList & tasks objects', () => {
     const idFromTasks = keys[keys.length-1];
     const idFromTodolists = endTodolistsState[0].id;
 
-    expect(idFromTasks).toBe(action.todolistId);
-    expect(idFromTodolists).toBe(action.todolistId);
+    expect(idFromTasks).toBe('my-test-id');
+    expect(idFromTodolists).toBe('my-test-id');
 
 });
 

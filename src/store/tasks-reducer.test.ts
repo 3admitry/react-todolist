@@ -102,7 +102,19 @@ beforeEach(() => {
 
 test('Add new task', () => {
     let newTitle: string = 'Banana';
-    let result = tasksReducer(tasksObjc, addTaskAC(newTitle, todolistId2))
+    let action = addTaskAC({
+        title: newTitle,
+        status: TaskStatuses.New,
+        addedDate: "",
+        deadline: "",
+        description: "" ,
+        order: 0,
+        id: 'id task',
+        priority: TaskPriorities.Hi,
+        startDate: "",
+        todoListId: todolistId2,
+    }, todolistId2)
+    let result = tasksReducer(tasksObjc, action)
 
     expect(result[todolistId2].length).toBe(tasksObjc[todolistId2].length + 1);
     // @ts-ignore
@@ -139,7 +151,7 @@ test('Change todolist status', () => {
 
 test('new array should be added when new todolist is added', () => {
 
-    const action = addTodolistAC('new todolist');
+    const action = addTodolistAC({id: 'my-test-id', title: 'What to learn', addedDate: '', order: 0},);
 
     const endState = tasksReducer(tasksObjc, action)
 

@@ -24,7 +24,8 @@ beforeEach(() => {
 
 test('Add new todoList object', () => {
     let newTitle: string = 'Holidays deals';
-    let result = todolistsReducer(todoLists, addTodolistAC(newTitle))
+    const action = addTodolistAC({id: 'my-test-id', title: newTitle, addedDate: '', order: 0},);
+    let result = todolistsReducer(todoLists, action)
 
     expect(result.length).toBe(todoLists.length + 1);
     expect(result[0].title).toBe('Holidays deals');
