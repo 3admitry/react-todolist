@@ -1,22 +1,15 @@
 import React, {useEffect, useState} from 'react'
-import axios from 'axios';
-import {todolistAPI} from '../api/todolist-api';
-
+import {todolistsAPI} from '../api/todolist-api';
 export default {
     title: 'TodoList/API',
 }
-const settings = {
-    withCredentials: true,
-    headers: {
-        'API-KEY': '8763fc73-614f-4013-b502-549dd18f0f18'
-    }
-}
+
 
 
 export const GetTodolists = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        todolistAPI.getTodolist().then(({data}) => {
+        todolistsAPI.getTodolists().then(({data}) => {
             setState(data);
         })
     }, [])
@@ -27,7 +20,7 @@ export const GetTodolists = () => {
 export const CreateTodolist = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        todolistAPI.createTodolist('newTodolist').then(({data}) => {
+        todolistsAPI.createTodolist('newTodolist').then(({data}) => {
             setState(data);
         })
 
@@ -39,8 +32,8 @@ export const CreateTodolist = () => {
 export const UpdateTodolistTitle = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        const todolistId = '95512281-1041-4e17-aa91-85f949a9a44a'
-        todolistAPI.updateTodolist(todolistId, 'SOME NEW TITLE')
+        const todolistId = '24a80a88-96d7-4b70-927a-27d5be0f0da9'
+        todolistsAPI.updateTodolist(todolistId, 'What to Learn')
             .then(({data}) => {
                 setState(data)
             })
@@ -52,8 +45,8 @@ export const UpdateTodolistTitle = () => {
 export const DeleteTodolist = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        const todolistId = '95512281-1041-4e17-aa91-85f949a9a44a';
-        todolistAPI.deleteTodolist(todolistId).then(({data}) => {
+        const todolistId = 'f51a3355-0c70-4259-8b14-c3cfcf34a14e';
+        todolistsAPI.deleteTodolist(todolistId).then(({data}) => {
             setState(data);
         })
 
@@ -64,23 +57,23 @@ export const DeleteTodolist = () => {
 
 
 //
-const TaskTodolistId = '4f4d44fd-b74c-4a1a-97d0-d6c0c6edd894';
-const TaskId = '95512281-1041-4e17-aa91-85f949a9a44a';
+const TaskTodolistId = '24a80a88-96d7-4b70-927a-27d5be0f0da9';
+const TaskId = '79b9d332-01f4-45fc-800d-44b7950dfb35';
 const TaskObj = {
-    title: 'New task title',
+    title: 'Updated task title',
     description: 'update desc',
     completed: true,
     status: 0,
     priority: 0,
-    startDate: 'string',
-    deadline: 'string',
+    startDate: '2022-06-23T10:31:11.02',
+    deadline: '2022-06-25T10:31:11.02',
 }
 
 export const GetTodolistsTasks = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
 
-        todolistAPI.getTodolistTasks(TaskTodolistId).then(({data}) => {
+        todolistsAPI.getTasks(TaskTodolistId).then(({data}) => {
             setState(data);
         })
     }, [])
@@ -91,7 +84,7 @@ export const GetTodolistsTasks = () => {
 export const CreateTodolistTask = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        todolistAPI.createTodolistTask(TaskTodolistId, 'Test task title').then(({data}) => {
+        todolistsAPI.createTask(TaskTodolistId, 'Test task title').then(({data}) => {
             setState(data);
         })
 
@@ -103,8 +96,7 @@ export const CreateTodolistTask = () => {
 export const UpdateTodolistTask = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        const todolistId = '95512281-1041-4e17-aa91-85f949a9a44a'
-        todolistAPI.updateTodolistTask(TaskTodolistId, TaskId, TaskObj)
+        todolistsAPI.updateTask(TaskTodolistId, TaskId, TaskObj)
             .then(({data}) => {
                 setState(data)
             })
@@ -116,7 +108,7 @@ export const UpdateTodolistTask = () => {
 export const DeleteTodolistTask = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        todolistAPI.deleteTodolistTask(TaskTodolistId, TaskId).then(({data}) => {
+        todolistsAPI.deleteTask(TaskTodolistId, TaskId).then(({data}) => {
             setState(data);
         })
 

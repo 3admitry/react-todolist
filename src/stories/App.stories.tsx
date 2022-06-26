@@ -2,17 +2,17 @@
 
 import React from 'react';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import AppWithRedux from '../AppWithRedux';
+import App from '../App';
 import {ReduxStoreProviderDecorator} from './ReduxStoreProviderDecorator';
 
 export default {
-    title: 'TodoList/AppWithRedux',
-    component: AppWithRedux,
+    title: 'TodoList/App',
+    component: App,
     decorators: [ReduxStoreProviderDecorator]
-} as ComponentMeta<typeof AppWithRedux>;
+} as ComponentMeta<typeof App>;
 
 
-export const AppWithReduxBaseExample: ComponentStory<typeof AppWithRedux> = () => <AppWithRedux />
+export const AppWithReduxBaseExample: ComponentStory<typeof App> = () => <App />
 
 
 

@@ -3,6 +3,7 @@
 import React from 'react';
 import {ComponentStory, ComponentMeta} from '@storybook/react';
 import {Task} from '../components/Task';
+import {TaskPriorities, TaskStatuses} from '../api/todolist-api';
 
 export default {
     title: 'TodoList/Task',
@@ -11,8 +12,8 @@ export default {
         /**
          *  todoListId - string. Id of Todolist array
          */
-        changeStatusTask: {action: 'Change status task:'},
-        changeTitleTask: {action: 'Change title task:'},
+        changeTaskStatus: {action: 'Change status task:'},
+        changeTaskTitle: {action: 'Change title task:'},
         removeTask: {action: 'Remove task:'},
     },
 } as ComponentMeta<typeof Task>;
@@ -32,15 +33,21 @@ const Template: ComponentStory<typeof Task> = (args) => <Task {...args} />;
 export const TaskIsDone = Template.bind({});
 
 TaskIsDone.args = {
-    task: {id: '1', isDone: true, title: 'React'},
-    todoListId: 'todoList1',
+    task: {
+        id: '1', title: 'React', status: TaskStatuses.Completed, todoListId: 'todolistId1', description: '',
+        startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low
+    },
+    todolistId: 'todoList1',
 };
 
 export const TaskIsNotDone = Template.bind({});
 
 TaskIsNotDone.args = {
-    task: {id: '2', isDone: false, title: 'Angular'},
-    todoListId: 'todoList2',
+    task: {
+        id: '2', title: 'Redux', status: TaskStatuses.New, todoListId: 'todoList2', description: '',
+        startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low
+    },
+    todolistId: 'todoList2',
 };
 
 /*export const BaseExample: ComponentStory<typeof Task> = (argTypes) => {

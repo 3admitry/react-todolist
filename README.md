@@ -42,3 +42,17 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React AppWithReducer documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+# Tests
+## Images-Snapshots
+
+Run image-Snapshots
+### `yarn run jest:integration`
+
+Update base images of image-Snapshots
+### `yarn run jest:integration --updateSnapshot`
+
+## DOM-Snapshots
+
+
+
