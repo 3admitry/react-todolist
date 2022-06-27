@@ -1,29 +1,17 @@
 import {TasksStateType} from '../App';
 import {v1} from 'uuid';
-import {TaskPriorities, TaskStatuses, TaskType} from '../api/todolist-api'
-import {
-    addTaskAC,
-    changeTaskStatusAC,
-    changeTaskTitleAC,
-    removeTaskAC,
-    setTasksAC,
-    tasksReducer
-} from './tasks-reducer';
-import {addTodolistAC, removeTodolistAC, TodolistDomainType} from './todolists-reducer';
+import {TaskPriorities, TaskStatuses} from '../api/todolist-api'
+import {addTaskAC, removeTaskAC, setTasksAC, tasksReducer, updateTaskAC} from './tasks-reducer';
+import {addTodolistAC, removeTodolistAC} from './todolists-reducer';
 
-let todoLists: TodolistDomainType[];
 let todolistId1: string;
 let todolistId2: string;
 let tasksObjc: TasksStateType;
-let tasks: Array<TaskType>
+
 
 beforeEach(() => {
     todolistId1 = v1();
     todolistId2 = v1();
-    todoLists = [
-        {id: todolistId1, title: 'What to learn', filter: 'all', addedDate: '', order: 0},
-        {id: todolistId2, title: 'What to buy', filter: 'all', addedDate: '', order: 0}
-    ];
     tasksObjc = {
         [todolistId1]: [
             {
@@ -32,19 +20,19 @@ beforeEach(() => {
             },
             {
                 id: v1(), title: 'JS', status: TaskStatuses.Completed, todoListId: 'todolistId1', description: '',
-                startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low
+                startDate: '', deadline: '', addedDate: '', order: 1, priority: TaskPriorities.Low
             },
             {
                 id: v1(), title: 'React', status: TaskStatuses.New, todoListId: 'todolistId1', description: '',
-                startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low
+                startDate: '', deadline: '', addedDate: '', order: 2, priority: TaskPriorities.Low
             },
             {
                 id: v1(), title: 'Babel', status: TaskStatuses.New, todoListId: 'todolistId1', description: '',
-                startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low
+                startDate: '', deadline: '', addedDate: '', order: 3, priority: TaskPriorities.Low
             },
             {
                 id: v1(), title: 'Mysql', status: TaskStatuses.Completed, todoListId: 'todolistId1', description: '',
-                startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low
+                startDate: '', deadline: '', addedDate: '', order: 4, priority: TaskPriorities.Low
             },
             {
                 id: v1(), title: 'NodeJS', status: TaskStatuses.New, todoListId: 'todolistId1', description: '',
@@ -58,11 +46,11 @@ beforeEach(() => {
             },
             {
                 id: v1(), title: 'Milk', status: TaskStatuses.Completed, todoListId: 'todolistId1', description: '',
-                startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low
+                startDate: '', deadline: '', addedDate: '', order: 1, priority: TaskPriorities.Low
             },
             {
                 id: v1(), title: 'Cookie', status: TaskStatuses.Completed, todoListId: 'todolistId1', description: '',
-                startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low
+                startDate: '', deadline: '', addedDate: '', order: 2, priority: TaskPriorities.Low
             },
             {
                 id: '5WAD48-AD4dA',
@@ -85,19 +73,7 @@ beforeEach(() => {
                 startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low
             }
         ]
-    };
-
-    tasks = [
-        {
-            id: v1(), title: 'Vue', status: TaskStatuses.New, todoListId: 'todolistId1', description: '',
-            startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low
-        },
-        {
-            id: v1(), title: 'Svelte', status: TaskStatuses.New, todoListId: 'todolistId1', description: '',
-            startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low
-        },
-    ]
-
+    }
 })
 
 test('Add new task', () => {
@@ -105,13 +81,13 @@ test('Add new task', () => {
     let action = addTaskAC({
         title: newTitle,
         status: TaskStatuses.New,
-        addedDate: "",
-        deadline: "",
-        description: "" ,
+        addedDate: '',
+        deadline: '',
+        description: '',
         order: 0,
         id: 'id task',
         priority: TaskPriorities.Hi,
-        startDate: "",
+        startDate: '',
         todoListId: todolistId2,
     }, todolistId2)
     let result = tasksReducer(tasksObjc, action)
@@ -134,7 +110,8 @@ test('Remove task', () => {
 
 test('Change task title', () => {
     let newTitle = 'Candies'
-    let result = tasksReducer(tasksObjc, changeTaskTitleAC('5WAD48-AD4dA', newTitle, todolistId2))
+    let action = updateTaskAC('5WAD48-AD4dA', {title: newTitle}, todolistId2)
+    let result = tasksReducer(tasksObjc, action)
 
     expect(result[todolistId2][3].title).toBe(newTitle);
 
@@ -142,8 +119,8 @@ test('Change task title', () => {
 });
 
 test('Change todolist status', () => {
-
-    let result = tasksReducer(tasksObjc, changeTaskStatusAC('5WAD48-AD4dA', TaskStatuses.New, todolistId2))
+    let action = updateTaskAC('5WAD48-AD4dA', {status: TaskStatuses.New}, todolistId2)
+    let result = tasksReducer(tasksObjc, action)
 
     expect(result[todolistId2][3].status).toBe(TaskStatuses.New);
 
@@ -157,7 +134,7 @@ test('new array should be added when new todolist is added', () => {
 
 
     const keys = Object.keys(endState);
-    const newKey = keys.find(k => k != todolistId1 && k != todolistId2);
+    const newKey = keys.find(k => k !== todolistId1 && k !== todolistId2);
     if (!newKey) {
         throw Error('new key should be added')
     }
