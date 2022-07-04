@@ -1,11 +1,11 @@
 import {Provider} from 'react-redux';
 import React from 'react';
 import {applyMiddleware, combineReducers, legacy_createStore as createStore} from 'redux';
-import {tasksReducer} from '../store/tasks-reducer';
-import {todolistsReducer} from '../store/todolists-reducer';
+import {tasksReducer} from '../features/TodolistsList/tasks-reducer';
+import {todolistsReducer} from '../features/TodolistsList/todolists-reducer';
 import {v1} from 'uuid';
 import {TaskPriorities, TaskStatuses} from '../api/todolist-api';
-import {AppRootStateType} from '../store/store';
+import {AppRootStateType} from '../app/store';
 import thunk from 'redux-thunk';
 
 const rootReducer = combineReducers({

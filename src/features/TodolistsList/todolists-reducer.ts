@@ -1,6 +1,6 @@
-import {todolistsAPI, TodolistType} from '../api/todolist-api'
+import {todolistsAPI, TodolistType} from '../../api/todolist-api'
 import {Dispatch} from 'redux';
-import {AppThunk} from './store';
+import {AppThunk} from '../../app/store';
 
 const initialState: Array<TodolistDomainType> = [
     /*{id: todolistId1, title: 'What to learn', filter: 'all', addedDate: '', order: 0},
@@ -52,7 +52,7 @@ export const fetchTodolistsTC = (): AppThunk => async dispatch => {
     const res = await todolistsAPI.getTodolists()
     dispatch(setTodolistsAC(res.data))
 }
-export const removeTodolistsTC = (todolistId: string): AppThunk => async dispatch => {
+export const removeTodolistTC = (todolistId: string): AppThunk => async dispatch => {
     await todolistsAPI.deleteTodolist(todolistId)
     dispatch(removeTodolistAC(todolistId))
 }

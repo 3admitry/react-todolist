@@ -3,7 +3,7 @@
 import React from 'react';
 
 import {ComponentStory, ComponentMeta} from '@storybook/react';
-import {EditableSpan} from '../components/EditableTitle';
+import {EditableSpan} from '../components/EditableSpan/EditableTitle';
 
 
 export default {

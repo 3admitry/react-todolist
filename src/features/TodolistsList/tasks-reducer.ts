@@ -1,7 +1,6 @@
-import {TasksStateType} from '../App';
 import {AddTodolistActionType, RemoveTodolistActionType, SetTodolistActionType} from './todolists-reducer';
-import {TaskPriorities, TaskStatuses, TaskType, todolistsAPI, UpdateTaskModelType} from '../api/todolist-api'
-import {AppRootStateType, AppThunk} from './store';
+import {TaskPriorities, TaskStatuses, TaskType, todolistsAPI, UpdateTaskModelType} from '../../api/todolist-api'
+import {AppRootStateType, AppThunk} from '../../app/store';
 
 const initialState: TasksStateType = {
     /*"todolistId1": [
@@ -75,7 +74,7 @@ export const removeTaskTC = (taskId: string, todolistId: string): AppThunk => as
     await todolistsAPI.deleteTask(todolistId, taskId)
     dispatch(removeTaskAC(taskId, todolistId))
 }
-export const addTaskTC = (todolistId: string, title: string): AppThunk => async dispatch => {
+export const addTaskTC = (title: string, todolistId: string): AppThunk => async dispatch => {
     const res = await todolistsAPI.createTask(todolistId, title)
     dispatch(addTaskAC(res.data.data.item, todolistId))
 }
@@ -111,6 +110,8 @@ export const updateTaskTC = (taskId: string, domainModel: UpdateTaskDomainModelT
 }
 
 //types
+
+export type TasksStateType = { [key: string]: Array<TaskType> }
 type RemoveTaskActionType = ReturnType<typeof removeTaskAC>
 type AddTaskActionType = ReturnType<typeof addTaskAC>
 type updateTaskActionType = ReturnType<typeof updateTaskAC>

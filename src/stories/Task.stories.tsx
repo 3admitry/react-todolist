@@ -2,15 +2,15 @@
 
 import React from 'react';
 import {ComponentStory, ComponentMeta} from '@storybook/react';
-import {Task} from '../components/Task';
 import {TaskPriorities, TaskStatuses} from '../api/todolist-api';
+import { Task } from '../features/TodolistsList/Todolist/Task/Task';
 
 export default {
     title: 'TodoList/Task',
     component: Task,
     argTypes: {
         /**
-         *  todoListId - string. Id of Todolist array
+         *  todoListId - string. Id of TodolistsList array
          */
         changeTaskStatus: {action: 'Change status task:'},
         changeTaskTitle: {action: 'Change title task:'},

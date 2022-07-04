@@ -1,14 +1,13 @@
 import React, {useCallback, useEffect} from 'react'
-import {AddItemForm} from './AddItemForm'
-import IconButton from '@mui/material/IconButton';
-import Button from '@mui/material/Button';
-import { Delete } from '@mui/icons-material';
-import {Task} from './Task'
-import {TaskStatuses, TaskType} from '../api/todolist-api'
-import {fetchTodolistsTC, FilterValuesType} from '../store/todolists-reducer'
-import {EditableSpan} from './EditableTitle';
-import {useDispatch} from 'react-redux';
-import {fetchTasksTC} from '../store/tasks-reducer';
+import {AddItemForm} from '../../../components/AddItemForm/AddItemForm'
+import {EditableSpan} from '../../../components/EditableSpan/EditableTitle'
+import {FilterValuesType} from '../todolists-reducer'
+import {useDispatch} from 'react-redux'
+import {fetchTasksTC} from '../tasks-reducer'
+import {TaskStatuses, TaskType} from '../../../api/todolist-api';
+import {Button, IconButton} from '@mui/material'
+import {Delete} from '@mui/icons-material';
+import {Task} from './Task/Task';
 
 type PropsType = {
     id: string
@@ -26,12 +25,13 @@ type PropsType = {
 }
 
 export const Todolist = React.memo(function (props: PropsType) {
+    console.log('Todolist called')
 
-    const dispatch = useDispatch();
-
-    useEffect(()=>{
-        dispatch(fetchTasksTC(props.id))
-    },[])
+    const dispatch = useDispatch()
+    useEffect(() => {
+        const thunk = fetchTasksTC(props.id)
+        dispatch(thunk)
+    }, [])
 
     const addTask = useCallback((title: string) => {
         props.addTask(title, props.id)
@@ -75,18 +75,17 @@ export const Todolist = React.memo(function (props: PropsType) {
             }
         </div>
         <div style={{paddingTop: '10px'}}>
-            <Button variant={props.filter === 'all' ? 'outlined' : 'text'}
+            <Button variant={props.filter === 'all' ? 'contained' : 'text'}
                     onClick={onAllClickHandler}
-                    color={'inherit'}
             >All
             </Button>
-            <Button variant={props.filter === 'active' ? 'outlined' : 'text'}
+            <Button variant={props.filter === 'active' ? 'contained' : 'text'}
                     onClick={onActiveClickHandler}
-                    color={'primary'}>Active
+                    color={'error'}>Active
             </Button>
-            <Button variant={props.filter === 'completed' ? 'outlined' : 'text'}
+            <Button variant={props.filter === 'completed' ? 'contained' : 'text'}
                     onClick={onCompletedClickHandler}
-                    color={'secondary'}>Completed
+                    color={'success'}>Completed
             </Button>
         </div>
     </div>
