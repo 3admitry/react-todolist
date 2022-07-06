@@ -12,7 +12,7 @@ export default {
 } as ComponentMeta<typeof App>;
 
 
-export const AppWithReduxBaseExample: ComponentStory<typeof App> = () => <App />
+export const AppWithReduxBaseExample: ComponentStory<typeof App> = () => <App demo={true}/>
 
 
 

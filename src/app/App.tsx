@@ -3,13 +3,19 @@ import './App.css'
 import {AppBar, Button, Container, IconButton, LinearProgress, Toolbar, Typography} from '@mui/material';
 import {TodolistsList} from '../features/TodolistsList/TodolistsList';
 import { Menu } from '@mui/icons-material';
+import {ErrorSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar';
+import {useAppSelector} from './hooks';
 
+type PropsType = {
+    demo?: boolean
+}
 
-function App() {
-
+function App({demo = false}:PropsType) {
+    const status = useAppSelector(state => state.app.status)
     return (
         <div className="App">
             <AppBar position="static">
+                <ErrorSnackbar />
                 <Toolbar>
                     <IconButton edge="start" color="inherit" aria-label="menu">
                         <Menu/>
@@ -19,10 +25,10 @@ function App() {
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
-                <LinearProgress />
+                {status === 'loading' && <LinearProgress />}
             </AppBar>
             <Container fixed>
-                <TodolistsList/>
+                <TodolistsList demo={demo}/>
             </Container>
         </div>
     )

@@ -5,11 +5,12 @@ import {
     changeTodolistTitleAC,
     removeTodolistAC,
     todolistsReducer,
-    TodolistDomainType, FilterValuesType, SetTodolistActionType, setTodolistsAC
+    TodolistDomainType, FilterValuesType, SetTodolistActionType, setTodolistsAC, changeTodolistTEntityStatusAC
 } from './todolists-reducer';
+import {RequestStatusType} from '../../app/app-reducer';
 
 
-let todoLists: TodolistDomainType[];
+let todoLists: Array<TodolistDomainType>;
 let todolistId1: string;
 let todolistId2: string;
 
@@ -17,8 +18,8 @@ beforeEach(() => {
     todolistId1 = v1();
     todolistId2 = v1();
     todoLists = [
-        {id: todolistId1, title: 'What to learn', filter: 'all', addedDate: '', order: 0},
-        {id: todolistId2, title: 'What to buy', filter: 'all', addedDate: '', order: 0}
+        {id: todolistId1, title: 'What to learn', filter: 'all', addedDate: '', order: 0, entityStatus: 'idle'},
+        {id: todolistId2, title: 'What to buy', filter: 'all', addedDate: '', order: 0, entityStatus: 'idle'}
     ];
 })
 
@@ -54,6 +55,14 @@ test('Change todolist filter', () => {
     let result = todolistsReducer(todoLists, changeTodolistFilterAC(todolistId1, newFilter))
 
     expect(result[0].filter).toBe('active');
+
+});
+test('Change todolist entityStatus', () => {
+    let newStatus: RequestStatusType = 'loading';
+    let result = todolistsReducer(todoLists, changeTodolistTEntityStatusAC(todolistId1, newStatus))
+
+    expect(result[0].entityStatus).toBe(newStatus);
+    expect(result[1].entityStatus).toBe('idle');
 
 });
 
