@@ -3,7 +3,6 @@ import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, {AlertProps} from '@mui/material/Alert';
 import {useAppDispatch, useAppSelector} from '../../app/hooks';
-import {useDispatch} from 'react-redux';
 import {setAppErrorAC} from '../../app/app-reducer';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -29,7 +28,7 @@ export function ErrorSnackbar() {
 
     return (
         <Stack spacing={2} sx={{width: '100%'}}>
-            <Snackbar open={isError} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{vertical: 'bottom', horizontal: 'right' }}>
+            <Snackbar open={isError} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{vertical: 'bottom', horizontal: 'center' }}>
                 <Alert onClose={handleClose} severity="error" sx={{width: '100%'}}>
                     {error}
                 </Alert>
