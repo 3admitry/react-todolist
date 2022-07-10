@@ -1,21 +1,59 @@
-import React from 'react'
+import React, {useCallback, useEffect} from 'react'
 import './App.css'
-import {AppBar, Button, Container, IconButton, LinearProgress, Toolbar, Typography} from '@mui/material';
+import {
+    AppBar,
+    Box,
+    Button,
+    Container,
+    IconButton,
+    LinearProgress,
+    Toolbar,
+    Typography,
+    CircularProgress
+} from '@mui/material';
 import {TodolistsList} from '../features/TodolistsList/TodolistsList';
-import { Menu } from '@mui/icons-material';
+import {Menu} from '@mui/icons-material';
 import {ErrorSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar';
-import {useAppSelector} from './hooks';
+import {useAppDispatch, useAppSelector} from './hooks';
+import {Navigate, Route, Routes} from 'react-router-dom';
+import {Login} from '../features/Login/Login';
+import {initializeAppTC} from './app-reducer';
+import {logoutTC} from '../features/Login/auth-reducer';
 
 type PropsType = {
     demo?: boolean
 }
 
-function App({demo = false}:PropsType) {
+function App({demo = false}: PropsType) {
     const status = useAppSelector(state => state.app.status)
+    const isInitialized = useAppSelector(state => state.app.isInitialized)
+    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+            dispatch(initializeAppTC())
+    }, [])
+
+    const logoutHandler = useCallback(()=>{
+        dispatch(logoutTC())
+    },[])
+
+    if (!isInitialized) {
+        return <Box sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignContent: 'center',
+            height: '100vh',
+            flexWrap: 'wrap'
+        }}>
+            <CircularProgress/>
+        </Box>
+    }
+
     return (
         <div className="App">
             <AppBar position="static">
-                <ErrorSnackbar />
+                <ErrorSnackbar/>
                 <Toolbar>
                     <IconButton edge="start" color="inherit" aria-label="menu">
                         <Menu/>
@@ -23,12 +61,15 @@ function App({demo = false}:PropsType) {
                     <Typography variant="h6">
                         News
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    {isLoggedIn && <Button color="inherit" onClick={logoutHandler}>Log out</Button>}
                 </Toolbar>
-                {status === 'loading' && <LinearProgress />}
+                {status === 'loading' && <LinearProgress/>}
             </AppBar>
             <Container fixed>
-                <TodolistsList demo={demo}/>
+                <Routes>
+                    <Route path="/" element={<TodolistsList demo={demo}/>}/>
+                    <Route path="/login" element={<Login/>}/>
+                </Routes>
             </Container>
         </div>
     )
