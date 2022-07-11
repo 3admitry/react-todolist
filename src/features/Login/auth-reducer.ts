@@ -2,6 +2,8 @@ import {authAPI, dataLoginType} from '../../api/todolist-api';
 import {setAppStatusAC} from '../../app/app-reducer';
 import {AppThunk} from '../../app/store';
 import {errorNetworkHandler, errorServerHandler} from '../../utils/error-utils';
+import {clearTodolistsAC} from '../TodolistsList/todolists-reducer';
+import {clearTasksAC} from '../TodolistsList/tasks-reducer';
 
 const initialState: LoginStateType = {
     userID: null,
@@ -43,6 +45,8 @@ export const logoutTC = (): AppThunk => async dispatch => {
         const res = await authAPI.logout()
         if (res.data.resultCode === 0) {
             dispatch(setLoggedUser(false))
+            dispatch(clearTasksAC())
+            dispatch(clearTodolistsAC())
             dispatch(setAppStatusAC('succeeded'))
         } else {
             errorServerHandler(res.data, dispatch)

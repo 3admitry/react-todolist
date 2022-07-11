@@ -52,6 +52,8 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Tasks
         }
         case 'SET-TASKS':
             return {...state, [action.todolistId]: action.tasks}
+        case 'CLEAR-TASKS':
+            return {}
         default:
             return state;
     }
@@ -66,6 +68,7 @@ export const updateTaskAC = (taskId: string, model: UpdateTaskDomainModelType, t
     ({type: 'UPDATE-TASK', model, todolistId, taskId} as const)
 export const setTasksAC = (tasks: Array<TaskType>, todolistId: string) =>
     ({type: 'SET-TASKS', tasks, todolistId} as const)
+export const clearTasksAC = () => ({type: 'CLEAR-TASKS'} as const)
 
 //Thunks
 export const fetchTasksTC = (todolistId: string): AppThunk => async dispatch => {
@@ -152,11 +155,13 @@ export type TasksStateType = { [key: string]: Array<TaskType> }
 type RemoveTaskActionType = ReturnType<typeof removeTaskAC>
 type AddTaskActionType = ReturnType<typeof addTaskAC>
 type updateTaskActionType = ReturnType<typeof updateTaskAC>
-type SetTasksType = ReturnType<typeof setTasksAC>
+type SetTasksActionType = ReturnType<typeof setTasksAC>
+export type clearTasksActionType = ReturnType<typeof clearTasksAC>
 
 export type TasksActionsType = RemoveTaskActionType | AddTaskActionType
     | updateTaskActionType
     | AddTodolistActionType
     | RemoveTodolistActionType
     | SetTodolistActionType
-    | SetTasksType
+    | SetTasksActionType
+    | clearTasksActionType

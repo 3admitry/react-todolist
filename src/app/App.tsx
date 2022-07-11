@@ -15,16 +15,18 @@ import {TodolistsList} from '../features/TodolistsList/TodolistsList';
 import {Menu} from '@mui/icons-material';
 import {ErrorSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar';
 import {useAppDispatch, useAppSelector} from './hooks';
-import {Navigate, Route, Routes} from 'react-router-dom';
+import {Navigate, Route, Routes, useParams} from 'react-router-dom';
 import {Login} from '../features/Login/Login';
 import {initializeAppTC} from './app-reducer';
 import {logoutTC} from '../features/Login/auth-reducer';
+import {PageNotFound} from '../components/404/PageNotFound';
 
 type PropsType = {
     demo?: boolean
 }
 
 function App({demo = false}: PropsType) {
+    const params = useParams();
     const status = useAppSelector(state => state.app.status)
     const isInitialized = useAppSelector(state => state.app.isInitialized)
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
@@ -69,6 +71,8 @@ function App({demo = false}: PropsType) {
                 <Routes>
                     <Route path="/" element={<TodolistsList demo={demo}/>}/>
                     <Route path="/login" element={<Login/>}/>
+                    <Route path="/404" element={<PageNotFound />}/>
+                    <Route path="*" element={<Navigate to={'/404'} />}/>
                 </Routes>
             </Container>
         </div>
