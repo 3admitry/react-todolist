@@ -74,11 +74,11 @@ export const Todolist = React.memo(function ({demo = false, ...props}: PropsType
             </Button>
             <Button variant={props.todolist.filter === 'active' ? 'contained' : 'text'}
                     onClick={onActiveClickHandler}
-                    color={'error'}>Active
+                    color={'primary'}>Active
             </Button>
             <Button variant={props.todolist.filter === 'completed' ? 'contained' : 'text'}
                     onClick={onCompletedClickHandler}
-                    color={'success'}>Completed
+                    color={'primary'}>Completed
             </Button>
         </div>
     </div>

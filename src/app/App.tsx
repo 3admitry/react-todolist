@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect} from 'react'
-import './App.css'
+import style from './App.module.scss'
 import {
     AppBar,
     Box,
@@ -9,7 +9,7 @@ import {
     LinearProgress,
     Toolbar,
     Typography,
-    CircularProgress
+    CircularProgress, createTheme, ThemeProvider
 } from '@mui/material';
 import {TodolistsList} from '../features/TodolistsList/TodolistsList';
 import {Menu} from '@mui/icons-material';
@@ -33,12 +33,12 @@ function App({demo = false}: PropsType) {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-            dispatch(initializeAppTC())
+        dispatch(initializeAppTC())
     }, [])
 
-    const logoutHandler = useCallback(()=>{
+    const logoutHandler = useCallback(() => {
         dispatch(logoutTC())
-    },[])
+    }, [])
 
     if (!isInitialized) {
         return <Box sx={{
@@ -52,30 +52,41 @@ function App({demo = false}: PropsType) {
         </Box>
     }
 
+    let theme = createTheme({
+        palette: {
+            mode: 'dark',
+            primary:{
+                main: '#f50000',
+            },
+            background: {
+                paper: 'rgba(255,255,255,0)',
+            }
+        },
+    });
+
     return (
-        <div className="App">
-            <AppBar position="static">
-                <ErrorSnackbar/>
-                <Toolbar>
-                    <IconButton edge="start" color="inherit" aria-label="menu">
-                        <Menu/>
-                    </IconButton>
-                    <Typography variant="h6">
-                        News
-                    </Typography>
-                    {isLoggedIn && <Button color="inherit" onClick={logoutHandler}>Log out</Button>}
-                </Toolbar>
-                {status === 'loading' && <LinearProgress/>}
-            </AppBar>
-            <Container fixed>
-                <Routes>
-                    <Route path="/" element={<TodolistsList demo={demo}/>}/>
-                    <Route path="/login" element={<Login/>}/>
-                    <Route path="/404" element={<PageNotFound />}/>
-                    <Route path="*" element={<Navigate to={'/404'} />}/>
-                </Routes>
-            </Container>
-        </div>
+        <ThemeProvider theme={theme}>
+            <div className={style.App}>
+                <div className={style.loader}>
+                    {status === 'loading' && <LinearProgress/>}
+                </div>
+                <AppBar position="static" className={style.header}>
+                    <ErrorSnackbar/>
+                    <Toolbar>
+                        {isLoggedIn &&
+                            <Button variant="outlined" color="inherit" onClick={logoutHandler}>Log out</Button>}
+                    </Toolbar>
+                </AppBar>
+                <Container fixed>
+                    <Routes>
+                        <Route path="/" element={<TodolistsList demo={demo}/>}/>
+                        <Route path="/login" element={<Login/>}/>
+                        <Route path="/404" element={<PageNotFound/>}/>
+                        <Route path="*" element={<Navigate to={'/404'}/>}/>
+                    </Routes>
+                </Container>
+            </div>
+        </ThemeProvider>
     )
 }
 

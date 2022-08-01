@@ -12,7 +12,7 @@ import {
 import {addTaskTC, removeTaskTC, TasksStateType, updateTaskTC} from './tasks-reducer'
 import {AddItemForm} from '../../components/AddItemForm/AddItemForm'
 import {TaskStatuses} from '../../api/todolist-api';
-import {Grid, Paper} from '@mui/material';
+import {Divider, Grid, Paper} from '@mui/material';
 import {Todolist} from './Todolist/Todolist';
 import {useAppSelector} from '../../app/hooks';
 import {Navigate} from 'react-router-dom';
@@ -33,7 +33,7 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
         }
         const thunk = fetchTodolistsTC()
         dispatch(thunk)
-    }, [])
+    }, [isLoggedIn])
 
     const removeTask = useCallback(function (id: string, todolistId: string) {
         const thunk = removeTaskTC(id, todolistId)
@@ -81,9 +81,12 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
 
 
     return <>
+        <Divider textAlign="left">Add New Todolist</Divider>
         <Grid container style={{padding: '20px'}}>
             <AddItemForm addItem={addTodolist}/>
         </Grid>
+        <Divider sx={{marginBottom: '1rem'}} textAlign="left">Current Todolist(s)</Divider>
+
         <Grid container spacing={3}>
             {
                 todolists.map(tl => {

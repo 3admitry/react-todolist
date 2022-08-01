@@ -1,0 +1,22 @@
+.App {
+  .loader {
+    height: 4px;
+    width: 100%;
+  }
+
+  .header {
+    background: none;
+    box-shadow: none;
+    align-items: end;
+  }
+
+  .loginForm {
+    form {
+      padding: 2rem 2rem;
+      border: 1px solid white;
+      border-radius: 5px;
+    }
+  }
+}
+
+
