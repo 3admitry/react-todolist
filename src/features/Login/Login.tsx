@@ -12,6 +12,7 @@ import {useAppDispatch, useAppSelector} from '../../app/hooks';
 import {loginTC} from './auth-reducer';
 import {Navigate} from 'react-router-dom';
 import style from './Login.module.scss'
+import {Link} from '@mui/material';
 
 export const Login = () => {
     const dispatch = useAppDispatch()
@@ -45,6 +46,13 @@ export const Login = () => {
         },
     });
 
+    const handleFillForm = (event: React.SyntheticEvent) => {
+        event.preventDefault();
+        formik.setFieldValue('email', 'web.refaq@gmail.com');
+        formik.setFieldValue('password', 'password');
+    }
+
+
     if (isUserLogged) {
         return <Navigate to="/"/>
     }
@@ -53,12 +61,12 @@ export const Login = () => {
         <form onSubmit={formik.handleSubmit}>
             <FormControl>
                 <FormLabel className={style.intoText}>
-                    <p>To log in get registered <a href={'https://social-network.samuraijs.com/'} target={'_blank'}
-                                                   rel="noreferrer">here</a>
+                    <p>To log in get registered <Link href='https://social-network.samuraijs.com/' target={'_blank'}
+                                                      rel="noreferrer">here</Link>
                     </p>
                     <p>or use common test account credentials:</p>
-                    <p>Email: free@samuraijs.com</p>
-                    <p>Password: free</p>
+                    <p>Email: web.refaq@gmail.com | Password: password</p>
+                    <p>or just click <Link href="#" onClick={handleFillForm}>fill form</Link></p>
                 </FormLabel>
                 <FormGroup>
                     <TextField

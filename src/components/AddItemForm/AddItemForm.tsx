@@ -2,6 +2,7 @@ import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import { AddBox } from '@mui/icons-material';
+import style from './AddItemForm.module.scss'
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
@@ -36,7 +37,7 @@ export const AddItemForm = React.memo(function ({addItem, disabled=false}: AddIt
         }
     }
 
-    return <div>
+    return <div className={style.addItemForm}>
         <TextField variant="outlined"
                    disabled={disabled}
                    error={!!error}

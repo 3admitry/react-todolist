@@ -76,7 +76,7 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
     }, [dispatch])
 
     if(!isLoggedIn) {
-        return <Navigate  to={'/Login'} />
+        return <Navigate  to={'/login'} />
     }
 
 
@@ -93,7 +93,7 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
                     let allTodolistTasks = tasks[tl.id]
 
                     return <Grid item key={tl.id}>
-                        <Paper style={{padding: '10px'}}>
+                        <Paper style={{padding: '10px 20px 20px'}}>
                             <Todolist
                                 todolist={tl}
                                 tasks={allTodolistTasks}
