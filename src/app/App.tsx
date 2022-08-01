@@ -4,18 +4,17 @@ import {
     AppBar,
     Box,
     Button,
+    CircularProgress,
     Container,
-    IconButton,
+    createTheme,
     LinearProgress,
-    Toolbar,
-    Typography,
-    CircularProgress, createTheme, ThemeProvider
+    ThemeProvider,
+    Toolbar
 } from '@mui/material';
 import {TodolistsList} from '../features/TodolistsList/TodolistsList';
-import {Menu} from '@mui/icons-material';
 import {ErrorSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar';
 import {useAppDispatch, useAppSelector} from './hooks';
-import {Navigate, Route, Routes, useParams} from 'react-router-dom';
+import {Route, Routes, useParams} from 'react-router-dom';
 import {Login} from '../features/Login/Login';
 import {initializeAppTC} from './app-reducer';
 import {logoutTC} from '../features/Login/auth-reducer';
@@ -30,6 +29,7 @@ function App({demo = false}: PropsType) {
     const status = useAppSelector(state => state.app.status)
     const isInitialized = useAppSelector(state => state.app.isInitialized)
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
+
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -54,7 +54,7 @@ function App({demo = false}: PropsType) {
 
     let theme = createTheme({
         palette: {
-            mode: 'dark',
+            mode: demo ? 'light':'dark',
             primary:{
                 main: '#f50000',
             },
@@ -74,7 +74,8 @@ function App({demo = false}: PropsType) {
                     <ErrorSnackbar/>
                     <Toolbar>
                         {isLoggedIn &&
-                            <Button variant="outlined" color="inherit" onClick={logoutHandler}>Log out</Button>}
+                            <Button variant="outlined" color="inherit" onClick={logoutHandler}>Log out</Button>
+                        }
                     </Toolbar>
                 </AppBar>
                 <Container fixed>

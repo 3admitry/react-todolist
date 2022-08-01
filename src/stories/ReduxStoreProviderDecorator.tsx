@@ -8,11 +8,14 @@ import {TaskPriorities, TaskStatuses} from '../api/todolist-api';
 import {AppRootStateType} from '../app/store';
 import thunk from 'redux-thunk';
 import {appReducer} from '../app/app-reducer';
+import {MemoryRouter, Route, Routes} from 'react-router-dom';
+import {authReducer} from '../features/Login/auth-reducer';
 
 const rootReducer = combineReducers({
     todolists: todolistsReducer,
     tasks: tasksReducer,
-    app: appReducer
+    app: appReducer,
+    auth: authReducer
 })
 
 let todolistId1 = v1();
@@ -54,7 +57,12 @@ export const storyBookStore = createStore(rootReducer, initialGlobalState as App
 export const ReduxStoreProviderDecorator = (Story: any) => {
     return (
         <Provider store={storyBookStore}>
-            {Story()}
+            {/*{Story()}*/}
+            <MemoryRouter>
+                <Routes>
+                    <Route path="/*" element={<Story />} />
+                </Routes>
+            </MemoryRouter>
         </Provider>
     )
 }
