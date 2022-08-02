@@ -7,7 +7,6 @@ let todolistId1: string;
 let todolistId2: string;
 let tasksObjc: TasksStateType;
 
-
 beforeEach(() => {
     todolistId1 = v1();
     todolistId2 = v1();

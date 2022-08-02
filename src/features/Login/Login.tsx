@@ -7,7 +7,7 @@ import FormGroup from '@mui/material/FormGroup';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import {ErrorMessage, useFormik} from 'formik';
+import {useFormik} from 'formik';
 import {useAppDispatch, useAppSelector} from '../../app/hooks';
 import {loginTC} from './auth-reducer';
 import {Navigate} from 'react-router-dom';
@@ -42,7 +42,6 @@ export const Login = () => {
         },
         onSubmit: values => {
             dispatch(loginTC(values))
-            //formik.resetForm()
         },
     });
 
@@ -51,7 +50,6 @@ export const Login = () => {
         formik.setFieldValue('email', 'web.refaq@gmail.com');
         formik.setFieldValue('password', 'password');
     }
-
 
     if (isUserLogged) {
         return <Navigate to="/"/>

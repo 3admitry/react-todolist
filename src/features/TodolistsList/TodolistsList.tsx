@@ -29,7 +29,7 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if(demo || !isLoggedIn){
+        if (demo || !isLoggedIn) {
             return
         }
         const thunk = fetchTodolistsTC()
@@ -76,8 +76,8 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
         dispatch(thunk)
     }, [dispatch])
 
-    if(!isLoggedIn) {
-        return <Navigate  to={'/login'} />
+    if (!isLoggedIn) {
+        return <Navigate to={'/login'}/>
     }
 
 
@@ -87,7 +87,6 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
             <AddItemForm addItem={addTodolist}/>
         </Grid>
         <Divider sx={{marginBottom: '1rem'}} textAlign="left">Current Todolist(s)</Divider>
-
         <Grid container spacing={3}>
             {
                 todolists.map(tl => {

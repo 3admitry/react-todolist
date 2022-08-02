@@ -117,7 +117,6 @@ export const changeTodolistTitleTC = (id: string, title: string): AppThunk => as
     }
 }
 
-
 // Types
 export type RemoveTodolistActionType = ReturnType<typeof removeTodolistAC>
 export type AddTodolistActionType = ReturnType<typeof addTodolistAC>

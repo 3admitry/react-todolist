@@ -62,5 +62,4 @@ type LoginStateType = {
     isLoggedIn: boolean
 }
 type setLoggedUserType = ReturnType<typeof setLoggedUser>
-
 export type LoginActionsType = setLoggedUserType

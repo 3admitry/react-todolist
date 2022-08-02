@@ -150,7 +150,6 @@ export const updateTaskTC = (taskId: string, domainModel: UpdateTaskDomainModelT
 }
 
 //types
-
 export type TasksStateType = { [key: string]: Array<TaskType> }
 type RemoveTaskActionType = ReturnType<typeof removeTaskAC>
 type AddTaskActionType = ReturnType<typeof addTaskAC>

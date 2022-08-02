@@ -51,16 +51,13 @@ const initialGlobalState = {
     }
 };
 
-
 export const storyBookStore = createStore(rootReducer, initialGlobalState as AppRootStateType, applyMiddleware(thunk));
-
 export const ReduxStoreProviderDecorator = (Story: any) => {
     return (
         <Provider store={storyBookStore}>
-            {/*{Story()}*/}
             <MemoryRouter>
                 <Routes>
-                    <Route path="/*" element={<Story />} />
+                    <Route path="/*" element={<Story/>}/>
                 </Routes>
             </MemoryRouter>
         </Provider>

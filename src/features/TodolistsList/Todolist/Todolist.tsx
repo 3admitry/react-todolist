@@ -1,14 +1,11 @@
-import React, {useCallback, useEffect} from 'react'
+import React, {useCallback} from 'react'
 import {AddItemForm} from '../../../components/AddItemForm/AddItemForm'
 import {EditableSpan} from '../../../components/EditableSpan/EditableTitle'
 import {FilterValuesType, TodolistDomainType} from '../todolists-reducer'
-import {useDispatch} from 'react-redux'
-import {fetchTasksTC} from '../tasks-reducer'
 import {TaskStatuses, TaskType} from '../../../api/todolist-api';
 import {Button, IconButton} from '@mui/material'
 import {Delete} from '@mui/icons-material';
 import {Task} from './Task/Task';
-import {useAppSelector} from '../../../app/hooks';
 
 type PropsType = {
     todolist: TodolistDomainType
@@ -52,7 +49,8 @@ export const Todolist = React.memo(function ({demo = false, ...props}: PropsType
     }
 
     return <div>
-        <h3><EditableSpan value={props.todolist.title} onChange={changeTodolistTitle} disabled={props.todolist.entityStatus === 'loading'}/>
+        <h3><EditableSpan value={props.todolist.title} onChange={changeTodolistTitle}
+                          disabled={props.todolist.entityStatus === 'loading'}/>
             <IconButton onClick={removeTodolist} disabled={props.todolist.entityStatus === 'loading'}>
                 <Delete/>
             </IconButton>

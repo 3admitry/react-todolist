@@ -47,6 +47,7 @@ export const initializeAppTC = (): AppThunk => async dispatch => {
     }
 }
 
+//Types
 export type AppReducerActionsType =
     | ReturnType<typeof setAppErrorAC>
     | ReturnType<typeof setAppStatusAC>

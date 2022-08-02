@@ -1,10 +1,6 @@
-// Button.stories.ts|tsx
-
 import React from 'react';
-
 import {ComponentStory, ComponentMeta} from '@storybook/react';
 import {EditableSpan} from '../components/EditableSpan/EditableTitle';
-
 
 export default {
     title: 'TodoList/EditableTitle',
@@ -13,7 +9,6 @@ export default {
         changeTitle: {action: 'Changed title:'},
     },
 } as ComponentMeta<typeof EditableSpan>;
-
 
 const Template: ComponentStory<typeof EditableSpan> = (args) => <EditableSpan {...args} />;
 

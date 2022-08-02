@@ -9,7 +9,6 @@ import {
 } from './todolists-reducer';
 import {RequestStatusType} from '../../app/app-reducer';
 
-
 let todoLists: Array<TodolistDomainType>;
 let todolistId1: string;
 let todolistId2: string;
