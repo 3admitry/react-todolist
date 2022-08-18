@@ -58,14 +58,14 @@ export const Login = () => {
     return <Grid container justifyContent={'center'} className={style.loginForm}>
         <form onSubmit={formik.handleSubmit}>
             <FormControl>
-                <FormLabel className={style.intoText}>
+                <div className={style.intoText}>
                     <p>To log in get registered <Link href='https://social-network.samuraijs.com/' target={'_blank'}
                                                       rel="noreferrer">here</Link>
                     </p>
                     <p>or use common test account credentials:</p>
                     <p>Email: web.refaq@gmail.com | Password: password</p>
                     <p>or just click <Link href="#" onClick={handleFillForm}>fill form</Link></p>
-                </FormLabel>
+                </div>
                 <FormGroup>
                     <TextField
                         label="Email"
